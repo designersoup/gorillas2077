@@ -1,0 +1,1015 @@
+fileFormatVersion: 2
+guid: 1717308426b904df887bb6bcd3ec87a9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6139368389838501564
+    second: angle bar anim_0
+  - first:
+      213: -4974941830524675224
+    second: angle bar anim_1
+  - first:
+      213: -5440233143262753388
+    second: angle bar anim_2
+  - first:
+      213: -5723132106962512276
+    second: angle bar anim_3
+  - first:
+      213: -8859447207973627180
+    second: angle bar anim_4
+  - first:
+      213: 506510585094933035
+    second: angle bar anim_5
+  - first:
+      213: -1523038716851537683
+    second: angle bar anim_6
+  - first:
+      213: 4866941136443460152
+    second: angle bar anim_7
+  - first:
+      213: -1746349993682248991
+    second: angle bar anim_8
+  - first:
+      213: -244557683853088960
+    second: angle bar anim_9
+  - first:
+      213: 8070261233469472954
+    second: angle bar anim_10
+  - first:
+      213: -6246558812922615382
+    second: angle bar anim_11
+  - first:
+      213: -6101683273106790022
+    second: angle bar anim_12
+  - first:
+      213: -8345722813941617186
+    second: angle bar anim_13
+  - first:
+      213: 3774191471330844103
+    second: angle bar anim_14
+  - first:
+      213: -2329160724700239572
+    second: angle bar anim_15
+  - first:
+      213: 480850919993998454
+    second: angle bar anim_16
+  - first:
+      213: 6218962846981878044
+    second: angle bar anim_17
+  - first:
+      213: 323614520007906543
+    second: angle bar anim_18
+  - first:
+      213: 4084972551627132277
+    second: angle bar anim_19
+  - first:
+      213: 8609817793166739108
+    second: angle bar anim_20
+  - first:
+      213: 5179572285880785664
+    second: angle bar anim_21
+  - first:
+      213: 5617379694919549718
+    second: angle bar anim_22
+  - first:
+      213: -2335180410431806061
+    second: angle bar anim_23
+  - first:
+      213: -3476706929942673601
+    second: angle bar anim_24
+  - first:
+      213: -8954024265240253933
+    second: angle bar anim_25
+  - first:
+      213: -6808963687107396794
+    second: angle bar anim_26
+  - first:
+      213: 9205765678318754580
+    second: angle bar anim_27
+  - first:
+      213: -8517142300993165061
+    second: angle bar anim_28
+  - first:
+      213: -1319692647255011899
+    second: angle bar anim_29
+  - first:
+      213: 8038674497712270415
+    second: angle bar anim_30
+  - first:
+      213: 2973161286533756377
+    second: angle bar anim_31
+  - first:
+      213: -8226397166220691204
+    second: angle bar anim_32
+  - first:
+      213: -4480538047544748389
+    second: angle bar anim_33
+  - first:
+      213: -527056014773547762
+    second: angle bar anim_34
+  - first:
+      213: -3254666296054432664
+    second: angle bar anim_35
+  - first:
+      213: 757747334853531074
+    second: angle bar anim_36
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: angle bar anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d93b26049807430c9ed8a68914f17fa
+      internalID: 6139368389838501564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ecc6d8c7b14e46dcb84fee86dd9a62c
+      internalID: -4974941830524675224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9119637c1bfc142c48fa0def579ebf60
+      internalID: -5440233143262753388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0ab5f38e45aa4eb798ec04f1864714e
+      internalID: -5723132106962512276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc5248e6d36504acbbaa6a8b50ddb3ba
+      internalID: -8859447207973627180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_5
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 246
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44a37e09aa434822b09a208e06a60e4
+      internalID: 506510585094933035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5cb1fcac0ce7475a9f4a462a37ee44e
+      internalID: -1523038716851537683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_7
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50368d8fb60bb414591c6c30d5c6e02d
+      internalID: 4866941136443460152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_8
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3d5b3ed110df4686aa44479937f029c
+      internalID: -1746349993682248991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_9
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6b6c7d4fbbed41109eb57b347434f3d
+      internalID: -244557683853088960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_10
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d6650fb33cd44f689a2c5eddadfb6dc
+      internalID: 8070261233469472954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_11
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 205
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aad501f9a14847ddb9264553038377c
+      internalID: -6246558812922615382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eb0d1cc3932c4d479e6be4c2d34cdbe
+      internalID: -6101683273106790022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_13
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9bfed045cce41e1b64096e4424b1be
+      internalID: -8345722813941617186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 936c2c8e932a84d65bbb0d8a97212bb9
+      internalID: 3774191471330844103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_15
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5165dfd085904c17b8c937e2d894a5b
+      internalID: -2329160724700239572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_16
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0fd9a6aed40d4d25961156833886089
+      internalID: 480850919993998454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_17
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 164
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3f96c5bc0a1e4c3f92f1d62ab945741
+      internalID: 6218962846981878044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c9c1c7f3e8d047f3b07a1e9fac044d9
+      internalID: 323614520007906543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_19
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf14d29894f864001af0bd37717ce7ea
+      internalID: 4084972551627132277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_20
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af8768eb5e5114cd19a6ac57bb111dc2
+      internalID: 8609817793166739108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_21
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a97fe8ba23eb404c90c21f7182df9be
+      internalID: 5179572285880785664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_22
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a1e2aedb2f0e460c9f74614c9eed70e
+      internalID: 5617379694919549718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_23
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 123
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef9f119d5018045e996daa4533ff0f34
+      internalID: -2335180410431806061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a2c309e97f4241bbaf601a61f2d44bf
+      internalID: -3476706929942673601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_25
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0462e2df92264bfd99b1eb495950715
+      internalID: -8954024265240253933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_26
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91a5741c9503c4d5198e1cb75c1c24d2
+      internalID: -6808963687107396794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_27
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7af2f96d96fa4975af3e96a8c1d3646
+      internalID: 9205765678318754580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_28
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4b3ef55840f44173af3af4e06594b82
+      internalID: -8517142300993165061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_29
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 82
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c52a57009f1de43739ffeef101643e8e
+      internalID: -1319692647255011899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e05bdc80e00054ef2800e04d87cf1a8f
+      internalID: 8038674497712270415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_31
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b38a8b8fb6bf4a1bba2df16960167de
+      internalID: 2973161286533756377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_32
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f185337ae86a64377a61033a307fe850
+      internalID: -8226397166220691204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_33
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aaac44d413af479e8c55b8dcb2586f0
+      internalID: -4480538047544748389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_34
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69303b6886d82471abd1b296080ea3f1
+      internalID: -527056014773547762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_35
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 41
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dcae373cc96e4560a8700a57dbb2167
+      internalID: -3254666296054432664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: angle bar anim_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 37
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b8ac10cbcdf41368382ff269ef831a
+      internalID: 757747334853531074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
