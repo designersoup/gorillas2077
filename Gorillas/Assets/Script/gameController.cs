@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public enum GameState
 
 {
+    titleCard,
+    mainMenu,
+    gameStep,
     player1turn,
     player1force,
     player1angle,
@@ -26,15 +29,16 @@ public class gameController : MonoBehaviour
     public GameObject player2;
     public GameObject bananaPrefab;
     public GameObject explosion;
+    public GameObject explosionPart;
     public GameState currentState;
     public bool gamePaused;
 
     public int Player1Score;
     public int Player2Score;
-    public GameObject Player1ScoreDisplay;
-    public GameObject Player2ScoreDisplay;
+   
+    
 
-    public GameObject pausePanel;
+    
 
     public GameObject[,] buildings;
     public int[] buildingHeights;
@@ -46,12 +50,19 @@ public class gameController : MonoBehaviour
 
 
 
+    // GUI Panels
+    public GameObject titleCard;
+    public GameObject menuCard;
     public GameObject player1panel;
     public GameObject player2panel;
     public GameObject player1win;
     public GameObject player2win;
     public GameObject forceBar;
     public GameObject angleBar;
+    public GameObject pausePanel;
+    public GameObject MainGameGUI;
+    public GameObject Player1ScoreDisplay;
+    public GameObject Player2ScoreDisplay;
 
     public Color buildingColour1;
     public Color buildingColour2;
@@ -78,23 +89,18 @@ public class gameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = GameState.gameSetup;
-        generateCity();
-        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
-        else currentState = GameState.player1turn;
-        playerTurn();
-        forceBar.SetActive(false);
-        angleBar.SetActive(false);
-        playerFiring = false;
-        playerAngling = false;
-        Player1ScoreDisplay.GetComponent<Text>().text = 0.ToString();
-        Player2ScoreDisplay.GetComponent<Text>().text = 0.ToString();
-        FindObjectOfType<audioManager>().Play("Music");
-
+        currentState = GameState.titleCard;
+        player1.SetActive(false);
+        player2.SetActive(false);
+        MainGameGUI.SetActive(false);
+        menuCard.SetActive(false);
+        titleCard.SetActive(true);
 
 
 
     }
+
+ 
 
     // Update is called once per frame
     void Update()
@@ -157,6 +163,34 @@ public class gameController : MonoBehaviour
 
     }
 
+    void GameSetup()
+    {
+        currentState = GameState.gameSetup;
+        player1.SetActive(true);
+        player2.SetActive(true);
+        MainGameGUI.SetActive(true);
+        generateCity();
+
+        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
+        else currentState = GameState.player1turn;
+        playerTurn();
+        forceBar.SetActive(false);
+        angleBar.SetActive(false);
+        playerFiring = false;
+        playerAngling = false;
+        Player1ScoreDisplay.GetComponent<Text>().text = 0.ToString();
+        Player2ScoreDisplay.GetComponent<Text>().text = 0.ToString();
+        FindObjectOfType<audioManager>().Play("Music");
+    }
+
+    public void GameStart()
+    {
+        currentState = GameState.gameSetup;
+        menuCard.SetActive(false);
+        GameSetup();
+
+    }
+
     public void playerInputs()
     {
         switch (currentState)
@@ -186,6 +220,14 @@ public class gameController : MonoBehaviour
                 playerFire(angleCounter, forceCounter);
                 break;
 
+            case GameState.titleCard:
+                titleCard.SetActive(false);
+                menuCard.SetActive(true);
+
+
+                break;
+                
+
 
         }
     }
@@ -211,9 +253,9 @@ public class gameController : MonoBehaviour
         if (currentState == GameState.player2fire)
         {
             player2.GetComponent<playerScript>().StartInv();
-            GameObject banana = Instantiate(bananaPrefab, player2.transform.position, Quaternion.identity);
+            GameObject banana = Instantiate(bananaPrefab, player2.transform.position, Quaternion.Euler(0, 180f, 0));
             banana.GetComponent<banana>().vertSpeed = Mathf.Sin((angleInput * Mathf.PI) / 180) * forceInput;
-            banana.GetComponent<banana>().horzSpeed = Mathf.Cos((angleInput * Mathf.PI) / 180) * -forceInput;
+            banana.GetComponent<banana>().horzSpeed = Mathf.Cos((angleInput * Mathf.PI) / 180) * forceInput;
            // banana.GetComponent<banana>().angle = -angleInput;
            // banana.GetComponent<banana>().velocity = -forceInput;
             banana.GetComponent<banana>().targetID = 1;
@@ -457,10 +499,11 @@ public class gameController : MonoBehaviour
 
     {
         int explosionCount = 0;
-        while (explosionCount < 3)
+        while (explosionCount < 4 )
         {
             
             Instantiate(explosion, new Vector2(positionX, positionY), transform.rotation);
+            Instantiate(explosionPart, new Vector2(positionX, positionY), transform.rotation);
             FindObjectOfType<audioManager>().ExplosionSFX(Random.Range(0,4));
             explosionCount++;
             yield return new WaitForSeconds(Random.Range(0.1f,0.5f));

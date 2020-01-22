@@ -16,6 +16,7 @@ public class banana : MonoBehaviour
 
     public GameObject explosion;
     public GameObject explosionFX;
+    public GameObject explosionPart;
 
     public bool gamePaused;
 
@@ -62,9 +63,14 @@ public class banana : MonoBehaviour
         {
             gameController.GetComponent<gameController>().TurnOver();
             Instantiate(explosion, transform.position, transform.rotation);
+            Instantiate(explosionPart, transform.position, transform.rotation);
             Instantiate(explosionFX, transform.position, transform.rotation);
             FindObjectOfType<audioManager>().ExplosionSFX(Random.Range(0,4));
             cameraObj.GetComponent<cameraControl>().bananaActive = false;
+            foreach(Transform child in this.transform)
+{
+                Destroy(child.gameObject);
+            }
             Destroy(gameObject);
             Destroy(other);
             Debug.Log("Building Hit");
