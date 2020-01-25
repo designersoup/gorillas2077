@@ -50,19 +50,26 @@ public class gameController : MonoBehaviour
 
 
 
-    // GUI Panels
+    [Header("GUI Panels")]
     public GameObject titleCard;
     public GameObject menuCard;
-    public GameObject player1panel;
-    public GameObject player2panel;
+    public GameObject optionsCard;
+    public GameObject setupScreen;
+  
     public GameObject player1win;
     public GameObject player2win;
-    public GameObject forceBar;
-    public GameObject angleBar;
     public GameObject pausePanel;
     public GameObject MainGameGUI;
     public GameObject Player1ScoreDisplay;
     public GameObject Player2ScoreDisplay;
+
+    [Header("HUD Items")]
+    public GameObject forceBar;
+    public GameObject angleBar;
+    public GameObject turnTimer;
+    public bool turnTimeLeft;
+
+    [Header("Building Customisation")]
 
     public Color buildingColour1;
     public Color buildingColour2;
@@ -79,6 +86,10 @@ public class gameController : MonoBehaviour
     private Animator anim;
     private Animator animAngle;
 
+    //Game Settings
+    public int numberOfRounds;
+    public int roundTimer;
+
     public bool musicOn;
     public bool soundOn;
     public GameObject musicButtonText;
@@ -94,7 +105,10 @@ public class gameController : MonoBehaviour
         player2.SetActive(false);
         MainGameGUI.SetActive(false);
         menuCard.SetActive(false);
+        optionsCard.SetActive(false);
         titleCard.SetActive(true);
+       
+
 
 
 
@@ -112,7 +126,10 @@ public class gameController : MonoBehaviour
                 forceBar.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(player1.transform.position.x + 0.8f, player1.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(-0.5f, 0.5f);
+                turnTimer.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y + 1.2f);
                 currentState = GameState.player1force;
+                
+                turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
                 StartCoroutine(forceGUI());
 
             }
@@ -121,7 +138,10 @@ public class gameController : MonoBehaviour
                 forceBar.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(player2.transform.position.x - 0.8f, player2.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(0.5f, 0.5f);
+                turnTimer.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y + 1.2f);
                 currentState = GameState.player2force;
+                
+                turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
                 StartCoroutine(forceGUI());
 
             }
@@ -152,12 +172,14 @@ public class gameController : MonoBehaviour
             {
                 forceBar.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(player1.transform.position.x + 0.8f, player1.transform.position.y + 0.6f);
+                turnTimer.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y + 1.2f);
             }
 
             if (currentState == GameState.player2fire || currentState == GameState.player2force)
             {
                 forceBar.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(player2.transform.position.x - 0.8f, player2.transform.position.y + 0.6f);
+                turnTimer.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y + 1.2f);
             }
         }
 
@@ -187,6 +209,10 @@ public class gameController : MonoBehaviour
     {
         currentState = GameState.gameSetup;
         menuCard.SetActive(false);
+        setupScreen.SetActive(false);
+        numberOfRounds = setupScreen.transform.Find("RoundNumberSelect").GetComponent<arrowSelects>().value;
+        roundTimer = setupScreen.transform.Find("TurnTimeSelect").GetComponent<arrowSelects>().value;
+        FindObjectOfType<audioManager>().Play("Select");
         GameSetup();
 
     }
@@ -221,6 +247,7 @@ public class gameController : MonoBehaviour
                 break;
 
             case GameState.titleCard:
+                currentState = GameState.mainMenu;
                 titleCard.SetActive(false);
                 menuCard.SetActive(true);
 
@@ -246,6 +273,7 @@ public class gameController : MonoBehaviour
             // banana.GetComponent<banana>().angle = angleInput;
             // banana.GetComponent<banana>().velocity = forceInput;
             banana.GetComponent<banana>().targetID = 2;
+            turnTimer.GetComponent<turnTimer>().StopTimer();
 
 
         }
@@ -259,6 +287,7 @@ public class gameController : MonoBehaviour
            // banana.GetComponent<banana>().angle = -angleInput;
            // banana.GetComponent<banana>().velocity = -forceInput;
             banana.GetComponent<banana>().targetID = 1;
+            turnTimer.GetComponent<turnTimer>().StopTimer();
 
         }
         FindObjectOfType<audioManager>().Play("BananaThrown");
@@ -523,16 +552,12 @@ public class gameController : MonoBehaviour
 
         if (currentState == GameState.player1turn)
         {
-            // player1panel.SetActive(true);
-            // player2panel.SetActive(false);
-            player1panel.GetComponent<playerInputs>().ResetValues();
+         
 
         }
         if (currentState == GameState.player2turn)
         {
-            //  player1panel.SetActive(false);
-            // player2panel.SetActive(true);
-            player2panel.GetComponent<playerInputs>().ResetValues();
+          
         }
     }
 
@@ -614,8 +639,75 @@ public class gameController : MonoBehaviour
         FindObjectOfType<audioManager>().Play("Select");
     }
 
+    public void optionsButton()
+    {
+        menuCard.SetActive(false);
+        optionsCard.SetActive(true);
+        FindObjectOfType<audioManager>().Play("Select");
+    }
+
+    public void optionsBackButton()
+    {
+        menuCard.SetActive(true);
+        optionsCard.SetActive(false);
+        FindObjectOfType<audioManager>().Play("Select");
+    }
+
+    public void matchSetup()
+    {
+
+        setupScreen.SetActive(true);
+        menuCard.SetActive(false);
+    }
+
+    public void ExitToMainMenuButton()
+    {
+        currentState = GameState.mainMenu;
+
+        FindObjectOfType<audioManager>().Play("Select");
+        player1.transform.position = new Vector2(-8.5f, -3.5f);
+        player2.transform.position = new Vector2(8.5f, -3.5f);
+        pausePanel.SetActive(false);
+        player1.SetActive(false);
+        player2.SetActive(false);
+        MainGameGUI.SetActive(false);
+        menuCard.SetActive(true);
+        optionsCard.SetActive(false);
+        forceBar.SetActive(false);
+        angleBar.SetActive(false);
+        forceCounter = 0;
+        angleCounter = 0;
+
+        destroyBuildings = GameObject.FindGameObjectsWithTag("Building");
+
+        for (var i = 0; i < destroyBuildings.Length; i++)
+        {
+            Destroy(destroyBuildings[i]);
+        }
+
+        destroyExplosions = GameObject.FindGameObjectsWithTag("Explosion");
+
+        for (var i = 0; i < destroyExplosions.Length; i++)
+        {
+            Destroy(destroyExplosions[i]);
+        }
+
+        buildings = new GameObject[0, 0];
+        buildingHeights = new int[0];
+        gamePaused = false;
 
 
-    
+    }
+
+    public void TurnTimerUp()
+    {
+       // turnTimeLeft = false;
+        if (currentState == GameState.player1force || currentState == GameState.player1angle) currentState = GameState.player1fire;
+        if (currentState == GameState.player2force || currentState == GameState.player2angle) currentState = GameState.player2fire;
+        playerFiring = false;
+        TurnOver();
+
+
+    }
 
 }

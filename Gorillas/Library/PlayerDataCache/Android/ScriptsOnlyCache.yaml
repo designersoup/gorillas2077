@@ -2,14 +2,15 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - SpriteController
+    - arrowSelects
     - audioManager
     - banana
     - cameraControl
     - cameraShake
     - gameController
-    - playerInputs
     - playerScript
     - rotationScript
+    - turnTimer
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridBrushEditor
@@ -77,39 +78,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10954}
     - Class: 114
-      Script: {instanceID: 11094}
+      Script: {instanceID: 11020}
     - Class: 114
-      Script: {instanceID: 11124}
+      Script: {instanceID: 11126}
     - Class: 114
-      Script: {instanceID: 11164}
+      Script: {instanceID: 11166}
     - Class: 114
-      Script: {instanceID: 11492}
+      Script: {instanceID: 11494}
     - Class: 114
-      Script: {instanceID: 11564}
+      Script: {instanceID: 11566}
     - Class: 114
-      Script: {instanceID: 11898}
+      Script: {instanceID: 11900}
     - Class: 114
-      Script: {instanceID: 11936}
+      Script: {instanceID: 11938}
     - Class: 114
-      Script: {instanceID: 12022}
+      Script: {instanceID: 12024}
     - Class: 114
-      Script: {instanceID: 12032}
+      Script: {instanceID: 12034}
     - Class: 114
-      Script: {instanceID: 12134}
+      Script: {instanceID: 12136}
     - Class: 114
-      Script: {instanceID: 12276}
+      Script: {instanceID: 12278}
     - Class: 114
-      Script: {instanceID: 12300}
+      Script: {instanceID: 12302}
     - Class: 114
-      Script: {instanceID: 12422}
+      Script: {instanceID: 12424}
     - Class: 114
-      Script: {instanceID: 12428}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 12534}
+      Script: {instanceID: 12536}
     - Class: 114
-      Script: {instanceID: 12678}
+      Script: {instanceID: 12680}
     - Class: 114
-      Script: {instanceID: 12802}
+      Script: {instanceID: 12804}
+    - Class: 114
+      Script: {instanceID: 14958}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -157,6 +160,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: d2ee9eaf6a435a7008e8f0d74f927910
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: arrowSelects
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -291,7 +300,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 614bc59d1a4780a4a5efe2bc945daec2
+      Hash: 7d664b83fd2da17a2c7caff2bb21ccdf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: gameController
@@ -613,6 +622,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 2e1f1eb3b013370329e9cf07cfb89742
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: turnTimer
   platform: 13
   scenePathNames:
   - Assets/Scenes/testArea.unity
