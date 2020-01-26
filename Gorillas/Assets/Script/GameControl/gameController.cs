@@ -19,26 +19,45 @@ public enum GameState
     player2fire,
     player1win,
     player2win,
-    gameSetup
+    gameSetup,
+    gameEnded
 }
+
+
 
 public class gameController : MonoBehaviour
 {
+    [System.Serializable]
+    public class Player
+    {
 
+        public string name;
+        public int score;
+        public GameObject prefab;
+    }
+
+
+    [Header("Prefabs")]
+    public Player playerOne = new Player();
+    public Player playerTwo = new Player();
     public GameObject player1;
     public GameObject player2;
     public GameObject bananaPrefab;
     public GameObject explosion;
     public GameObject explosionPart;
+
+    [Header("Game States")]
     public GameState currentState;
     public bool gamePaused;
-
     public int Player1Score;
     public int Player2Score;
-   
-    
+    public int numberOfRounds;
+    public int roundTimer;
+    public int currentRound;
 
-    
+
+
+
 
     public GameObject[,] buildings;
     public int[] buildingHeights;
@@ -55,6 +74,7 @@ public class gameController : MonoBehaviour
     public GameObject menuCard;
     public GameObject optionsCard;
     public GameObject setupScreen;
+    public GameObject gameEndedCard;
   
     public GameObject player1win;
     public GameObject player2win;
@@ -62,12 +82,16 @@ public class gameController : MonoBehaviour
     public GameObject MainGameGUI;
     public GameObject Player1ScoreDisplay;
     public GameObject Player2ScoreDisplay;
+    public GameObject Player1NameDisplay;
+    public GameObject Player2NameDisplay;
 
     [Header("HUD Items")]
     public GameObject forceBar;
     public GameObject angleBar;
     public GameObject turnTimer;
     public bool turnTimeLeft;
+    public GameObject roundText;
+    
 
     [Header("Building Customisation")]
 
@@ -87,8 +111,7 @@ public class gameController : MonoBehaviour
     private Animator animAngle;
 
     //Game Settings
-    public int numberOfRounds;
-    public int roundTimer;
+   
 
     public bool musicOn;
     public bool soundOn;
@@ -107,7 +130,11 @@ public class gameController : MonoBehaviour
         menuCard.SetActive(false);
         optionsCard.SetActive(false);
         titleCard.SetActive(true);
-       
+        turnTimer.SetActive(false);
+        roundText.SetActive(false);
+
+        Debug.Log(playerOne.score);
+        
 
 
 
@@ -188,10 +215,15 @@ public class gameController : MonoBehaviour
     void GameSetup()
     {
         currentState = GameState.gameSetup;
+        playerOne.score = 0;
+        playerTwo.score = 0;
+        
+
         player1.SetActive(true);
         player2.SetActive(true);
         MainGameGUI.SetActive(true);
         generateCity();
+        turnTimer.SetActive(true);
 
         if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
         else currentState = GameState.player1turn;
@@ -203,6 +235,9 @@ public class gameController : MonoBehaviour
         Player1ScoreDisplay.GetComponent<Text>().text = 0.ToString();
         Player2ScoreDisplay.GetComponent<Text>().text = 0.ToString();
         FindObjectOfType<audioManager>().Play("Music");
+        Player1NameDisplay.GetComponent<Text>().text = playerOne.name;
+        Player2NameDisplay.GetComponent<Text>().text = playerTwo.name;
+
     }
 
     public void GameStart()
@@ -212,6 +247,8 @@ public class gameController : MonoBehaviour
         setupScreen.SetActive(false);
         numberOfRounds = setupScreen.transform.Find("RoundNumberSelect").GetComponent<arrowSelects>().value;
         roundTimer = setupScreen.transform.Find("TurnTimeSelect").GetComponent<arrowSelects>().value;
+        currentRound = 1;
+      
         FindObjectOfType<audioManager>().Play("Select");
         GameSetup();
 
@@ -308,7 +345,7 @@ public class gameController : MonoBehaviour
            
             
                 currentState = GameState.player1win;
-                Player1Score++;
+                playerOne.score++;
            
             
         }
@@ -319,11 +356,12 @@ public class gameController : MonoBehaviour
             PlayerExplosion(player1.transform.position.x, player1.transform.position.y);
            
                 currentState = GameState.player2win;
-                Player2Score++;
+                playerTwo.score++;
            
         }
         
         Debug.Log("Player Hit");
+
         TurnOver();
     }
 
@@ -370,6 +408,9 @@ public class gameController : MonoBehaviour
         Debug.Log(player1offset);
         player1.transform.position = new Vector2(player1.transform.position.x + player1offset, player1.transform.position.y + (buildingHeights[1 + player1offset] * 0.5f - 1.0f));
         player2.transform.position = new Vector2(player2.transform.position.x - player2offset, player2.transform.position.y + (buildingHeights[18 - player2offset] * 0.5f - 1.0f));
+        roundText.SetActive(true);
+        roundText.GetComponent<roundText>().StartAnim(currentRound);
+        
     }
 
     public void resetCity()
@@ -395,8 +436,9 @@ public class gameController : MonoBehaviour
         player2.SetActive(true);
         
         generateCity();
-        Player1ScoreDisplay.GetComponent<Text>().text = Player1Score.ToString();
-        Player2ScoreDisplay.GetComponent<Text>().text = Player2Score.ToString();
+        Player1ScoreDisplay.GetComponent<Text>().text = playerOne.score.ToString();
+        Player2ScoreDisplay.GetComponent<Text>().text = playerTwo.score.ToString();
+        roundText.GetComponent<roundText>().StartAnim(currentRound);
         currentState = GameState.player1turn;
         playerTurn();
 
@@ -439,14 +481,25 @@ public class gameController : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         player1win.SetActive(false);
         player2win.SetActive(false);
-        resetLevel();
+        currentRound++;
+        if (currentRound <= numberOfRounds) resetLevel();
+
+        else callWinPanel();
 
 
+    }
+
+    public void callWinPanel()
+    {
+        gameEndedCard.SetActive(true);
+        gameEndedCard.GetComponent<endOfGame>().showScores(playerOne.name, playerOne.score, playerTwo.name, playerTwo.score);
+        MainGameGUI.SetActive(false);
     }
 
     public IEnumerator TurnEndTimer()
     {
         yield return new WaitForSeconds(0.75f);
+       
         playerTurn();
 
 
@@ -565,6 +618,7 @@ public class gameController : MonoBehaviour
     {
         //Debug.Log("Restarting level");
         //Application.LoadLevel(Application.loadedLevel);
+        
         resetCity();
     }
 
@@ -663,6 +717,7 @@ public class gameController : MonoBehaviour
     public void ExitToMainMenuButton()
     {
         currentState = GameState.mainMenu;
+        roundText.SetActive(false);
 
         FindObjectOfType<audioManager>().Play("Select");
         player1.transform.position = new Vector2(-8.5f, -3.5f);
@@ -671,6 +726,7 @@ public class gameController : MonoBehaviour
         player1.SetActive(false);
         player2.SetActive(false);
         MainGameGUI.SetActive(false);
+        turnTimer.SetActive(false);
         menuCard.SetActive(true);
         optionsCard.SetActive(false);
         forceBar.SetActive(false);
@@ -695,6 +751,7 @@ public class gameController : MonoBehaviour
         buildings = new GameObject[0, 0];
         buildingHeights = new int[0];
         gamePaused = false;
+        gameEndedCard.SetActive(false);
 
 
     }
