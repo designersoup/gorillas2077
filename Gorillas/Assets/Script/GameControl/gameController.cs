@@ -396,9 +396,17 @@ public class gameController : MonoBehaviour
 
 
                 }
-                buildings[i, j].GetComponent<SpriteRenderer>().sprite = buildingBlocks[Random.Range(0, buildingBlocks.Length)];
+                buildings[i, j].GetComponent<SpriteRenderer>().sprite = buildingBlocks[0];
+
                 buildingHeights[i]++;
 
+            }
+
+            // buildings[i,buildingHeights[i]-1].GetComponent<SpriteRenderer>().sprite = buildingBlocks[1];
+            for (int k = 0; k < Random.Range(2,(buildingHeights[i] / 2)); k++)
+            {
+                buildings[i, buildingHeights[i] - 1 - k].GetComponent<SpriteRenderer>().sprite = buildingBlocks[Random.Range(1,4)];
+                buildings[i, buildingHeights[i] - 2 - k].GetComponent<SpriteRenderer>().sprite = buildingBlocks[Random.Range(4,6)];
             }
 
 
