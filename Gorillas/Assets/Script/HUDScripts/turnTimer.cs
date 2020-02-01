@@ -27,6 +27,7 @@ public class turnTimer : MonoBehaviour
     public void StopTimer()
     {
         turnStopped = true;
+        
     }
 
     
@@ -55,6 +56,15 @@ public class turnTimer : MonoBehaviour
 
     public void TimeUp()
     {
-        if (timeLeft == 0) gameController.GetComponent<gameController>().TurnTimerUp();
+        
+
+        if (timeLeft == 0)
+        {
+            this.transform.GetComponent<Text>().text = timeLeft.ToString("Time Up!");
+            gameController.GetComponent<gameController>().TurnTimerUp();
+        }
+
     }
+
+    
 }

@@ -75,9 +75,9 @@ public class gameController : MonoBehaviour
     public GameObject optionsCard;
     public GameObject setupScreen;
     public GameObject gameEndedCard;
-  
-    public GameObject player1win;
-    public GameObject player2win;
+
+    public GameObject winPanel;
+    
     public GameObject pausePanel;
     public GameObject MainGameGUI;
     public GameObject Player1ScoreDisplay;
@@ -124,8 +124,8 @@ public class gameController : MonoBehaviour
     void Start()
     {
         currentState = GameState.titleCard;
-        player1.SetActive(false);
-        player2.SetActive(false);
+        playerOne.prefab.SetActive(false);
+        playerTwo.prefab.SetActive(false);
         MainGameGUI.SetActive(false);
         menuCard.SetActive(false);
         optionsCard.SetActive(false);
@@ -150,25 +150,30 @@ public class gameController : MonoBehaviour
         {
             if (currentState == GameState.player1turn)
             {
-                forceBar.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y - 1.0f);
-                angleBar.transform.position = new Vector2(player1.transform.position.x + 0.8f, player1.transform.position.y + 0.6f);
+                forceBar.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y - 1.0f);
+                angleBar.transform.position = new Vector2(playerOne.prefab.transform.position.x + 0.8f, playerOne.prefab.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(-0.5f, 0.5f);
-                turnTimer.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y + 1.2f);
+                turnTimer.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y + 1.2f);
                 currentState = GameState.player1force;
                 
                 turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+                playerOne.prefab.GetComponent<animationController>().setAnim("default");
+                playerTwo.prefab.GetComponent<animationController>().setAnim("idle");
                 StartCoroutine(forceGUI());
 
             }
             if (currentState == GameState.player2turn)
             {
-                forceBar.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y - 1.0f);
-                angleBar.transform.position = new Vector2(player2.transform.position.x - 0.8f, player2.transform.position.y + 0.6f);
+                forceBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y - 1.0f);
+                angleBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x - 0.8f, playerTwo.prefab.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(0.5f, 0.5f);
-                turnTimer.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y + 1.2f);
+                turnTimer.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y + 1.2f);
                 currentState = GameState.player2force;
                 
                 turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+                playerOne.prefab.GetComponent<animationController>().setAnim("idle");
+                playerTwo.prefab.GetComponent<animationController>().setAnim("default");
+
                 StartCoroutine(forceGUI());
 
             }
@@ -197,16 +202,16 @@ public class gameController : MonoBehaviour
 
             if (currentState == GameState.player1fire || currentState == GameState.player1force)
             {
-                forceBar.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y - 1.0f);
-                angleBar.transform.position = new Vector2(player1.transform.position.x + 0.8f, player1.transform.position.y + 0.6f);
-                turnTimer.transform.position = new Vector2(player1.transform.position.x, player1.transform.position.y + 1.2f);
+                forceBar.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y - 1.0f);
+                angleBar.transform.position = new Vector2(playerOne.prefab.transform.position.x + 0.8f, playerOne.prefab.transform.position.y + 0.6f);
+                turnTimer.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y + 1.2f);
             }
 
             if (currentState == GameState.player2fire || currentState == GameState.player2force)
             {
-                forceBar.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y - 1.0f);
-                angleBar.transform.position = new Vector2(player2.transform.position.x - 0.8f, player2.transform.position.y + 0.6f);
-                turnTimer.transform.position = new Vector2(player2.transform.position.x, player2.transform.position.y + 1.2f);
+                forceBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y - 1.0f);
+                angleBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x - 0.8f, playerTwo.prefab.transform.position.y + 0.6f);
+                turnTimer.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y + 1.2f);
             }
         }
 
@@ -217,10 +222,10 @@ public class gameController : MonoBehaviour
         currentState = GameState.gameSetup;
         playerOne.score = 0;
         playerTwo.score = 0;
-        
 
-        player1.SetActive(true);
-        player2.SetActive(true);
+
+        playerOne.prefab.SetActive(true);
+        playerTwo.prefab.SetActive(true);
         MainGameGUI.SetActive(true);
         generateCity();
         turnTimer.SetActive(true);
@@ -268,7 +273,7 @@ public class gameController : MonoBehaviour
             case GameState.player1angle:
                 playerAngling = false;
                 currentState = GameState.player1fire;
-                playerFire(angleCounter, forceCounter);
+                StartCoroutine(launchDelay());
                 break;
 
             case GameState.player2force:
@@ -280,7 +285,7 @@ public class gameController : MonoBehaviour
             case GameState.player2angle:
                 playerAngling = false;
                 currentState = GameState.player2fire;
-                playerFire(angleCounter, forceCounter);
+                StartCoroutine(launchDelay());
                 break;
 
             case GameState.titleCard:
@@ -301,8 +306,9 @@ public class gameController : MonoBehaviour
         if (currentState == GameState.player1fire)
         {
 
-            player1.GetComponent<playerScript>().StartInv();
-            GameObject banana = Instantiate(bananaPrefab, player1.transform.position, Quaternion.identity);
+            playerOne.prefab.GetComponent<playerScript>().StartInv();
+            
+            GameObject banana = Instantiate(bananaPrefab, playerOne.prefab.transform.position, Quaternion.identity);
            // vertSpeed = Mathf.Sin((angle * Mathf.PI) / 180) * velocity;
            // horzSpeed = Mathf.Cos((angle * Mathf.PI) / 180) * velocity;
             banana.GetComponent<banana>().vertSpeed = Mathf.Sin((angleInput * Mathf.PI) / 180) * forceInput;
@@ -311,20 +317,23 @@ public class gameController : MonoBehaviour
             // banana.GetComponent<banana>().velocity = forceInput;
             banana.GetComponent<banana>().targetID = 2;
             turnTimer.GetComponent<turnTimer>().StopTimer();
+            playerOne.prefab.GetComponent<animationController>().setAnim("throw");
+
 
 
         }
 
         if (currentState == GameState.player2fire)
         {
-            player2.GetComponent<playerScript>().StartInv();
-            GameObject banana = Instantiate(bananaPrefab, player2.transform.position, Quaternion.Euler(0, 180f, 0));
+            playerTwo.prefab.GetComponent<playerScript>().StartInv();
+            GameObject banana = Instantiate(bananaPrefab, playerTwo.prefab.transform.position, Quaternion.Euler(0, 180f, 0));
             banana.GetComponent<banana>().vertSpeed = Mathf.Sin((angleInput * Mathf.PI) / 180) * forceInput;
             banana.GetComponent<banana>().horzSpeed = Mathf.Cos((angleInput * Mathf.PI) / 180) * forceInput;
            // banana.GetComponent<banana>().angle = -angleInput;
            // banana.GetComponent<banana>().velocity = -forceInput;
             banana.GetComponent<banana>().targetID = 1;
             turnTimer.GetComponent<turnTimer>().StopTimer();
+            playerTwo.prefab.GetComponent<animationController>().setAnim("throw");
 
         }
         FindObjectOfType<audioManager>().Play("BananaThrown");
@@ -339,9 +348,9 @@ public class gameController : MonoBehaviour
         if (playerID == 2)
         {
             
-            player2.SetActive(false);
+            playerTwo.prefab.SetActive(false);
             //Instantiate(explosion, player2.transform.position, transform.rotation);
-            PlayerExplosion(player2.transform.position.x, player2.transform.position.y);
+            PlayerExplosion(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y);
            
             
                 currentState = GameState.player1win;
@@ -351,9 +360,9 @@ public class gameController : MonoBehaviour
         }
         else
         {
-            player1.SetActive(false);
+            playerOne.prefab.SetActive(false);
             //Instantiate(explosion, player1.transform.position, transform.rotation);
-            PlayerExplosion(player1.transform.position.x, player1.transform.position.y);
+            PlayerExplosion(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y);
            
                 currentState = GameState.player2win;
                 playerTwo.score++;
@@ -367,8 +376,8 @@ public class gameController : MonoBehaviour
 
     public void generateCity()
     {
-        player1.transform.position = new Vector2(-8.5f, -3.5f);
-        player2.transform.position = new Vector2(8.5f, -3.5f);
+        playerOne.prefab.transform.position = new Vector2(-8.5f, -3.5f);
+        playerTwo.prefab.transform.position = new Vector2(8.5f, -3.5f);
         buildings = new GameObject[20, maxHeight];
         buildingHeights = new int[20];
         for (int i = 0; i < 20; i++)
@@ -414,8 +423,8 @@ public class gameController : MonoBehaviour
         int player1offset = Random.Range(1, 5);
         int player2offset = Random.Range(1, 5);
         Debug.Log(player1offset);
-        player1.transform.position = new Vector2(player1.transform.position.x + player1offset, player1.transform.position.y + (buildingHeights[1 + player1offset] * 0.5f - 1.0f));
-        player2.transform.position = new Vector2(player2.transform.position.x - player2offset, player2.transform.position.y + (buildingHeights[18 - player2offset] * 0.5f - 1.0f));
+        playerOne.prefab.transform.position = new Vector2(playerOne.prefab.transform.position.x + player1offset, playerOne.prefab.transform.position.y + (buildingHeights[1 + player1offset] * 0.5f - 1.0f));
+        playerTwo.prefab.transform.position = new Vector2(playerTwo.prefab.transform.position.x - player2offset, playerTwo.prefab.transform.position.y + (buildingHeights[18 - player2offset] * 0.5f - 1.0f));
         roundText.SetActive(true);
         roundText.GetComponent<roundText>().StartAnim(currentRound);
         
@@ -440,8 +449,8 @@ public class gameController : MonoBehaviour
 
         buildings = new GameObject[0, 0];
         buildingHeights = new int[0];
-        player1.SetActive(true);
-        player2.SetActive(true);
+        playerOne.prefab.SetActive(true);
+        playerTwo.prefab.SetActive(true);
         
         generateCity();
         Player1ScoreDisplay.GetComponent<Text>().text = playerOne.score.ToString();
@@ -471,7 +480,8 @@ public class gameController : MonoBehaviour
             else
             {
                 Debug.Log("Win State P2");
-                player2win.SetActive(true);
+                winPanel.GetComponent<winCaption>().showPanel(playerTwo.name);
+                playerTwo.prefab.GetComponent<animationController>().setAnim("celebrate");
                 StartCoroutine(winTimer());
 
             }
@@ -479,7 +489,8 @@ public class gameController : MonoBehaviour
         else
         {
             Debug.Log("Win State P1");
-            player1win.SetActive(true);
+            winPanel.GetComponent<winCaption>().showPanel(playerOne.name);
+            playerOne.prefab.GetComponent<animationController>().setAnim("celebrate");
             StartCoroutine(winTimer());
         }
     }
@@ -487,8 +498,7 @@ public class gameController : MonoBehaviour
     public IEnumerator winTimer()
     {
         yield return new WaitForSeconds(2.0f);
-        player1win.SetActive(false);
-        player2win.SetActive(false);
+        winPanel.GetComponent<winCaption>().hidePanel();
         currentRound++;
         if (currentRound <= numberOfRounds) resetLevel();
 
@@ -728,11 +738,11 @@ public class gameController : MonoBehaviour
         roundText.SetActive(false);
 
         FindObjectOfType<audioManager>().Play("Select");
-        player1.transform.position = new Vector2(-8.5f, -3.5f);
-        player2.transform.position = new Vector2(8.5f, -3.5f);
+        playerOne.prefab.transform.position = new Vector2(-8.5f, -3.5f);
+        playerTwo.prefab.transform.position = new Vector2(8.5f, -3.5f);
         pausePanel.SetActive(false);
-        player1.SetActive(false);
-        player2.SetActive(false);
+        playerOne.prefab.SetActive(false);
+        playerTwo.prefab.SetActive(false);
         MainGameGUI.SetActive(false);
         turnTimer.SetActive(false);
         menuCard.SetActive(true);
@@ -770,9 +780,26 @@ public class gameController : MonoBehaviour
         if (currentState == GameState.player1force || currentState == GameState.player1angle) currentState = GameState.player1fire;
         if (currentState == GameState.player2force || currentState == GameState.player2angle) currentState = GameState.player2fire;
         playerFiring = false;
+        FindObjectOfType<audioManager>().Play("timesUp");
+        StartCoroutine(turnoverDelay());
+        
+
+
+    }
+
+    public IEnumerator launchDelay()
+    {
+
+        yield return new WaitForSeconds(0.1f);
+        playerFire(angleCounter, forceCounter);
+
+
+    }
+
+    public IEnumerator turnoverDelay()
+    {
+        yield return new WaitForSeconds(1.0f);
         TurnOver();
-
-
     }
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class banana : MonoBehaviour
 {
+    
     public float velocity;
     public float gravity;
     public float calcGrav;
@@ -25,6 +26,7 @@ public class banana : MonoBehaviour
 
     void Start()
     {
+
         cameraObj = GameObject.Find("Main Camera");
         cameraObj.GetComponent<cameraControl>().bananaActive = true;
         gameController = GameObject.Find("GameController");
