@@ -9,6 +9,7 @@ public enum GameState
     titleCard,
     mainMenu,
     gameStep,
+    preRound,
     player1turn,
     player1force,
     player1angle,
@@ -77,6 +78,7 @@ public class gameController : MonoBehaviour
     public GameObject gameEndedCard;
 
     public GameObject winPanel;
+    public GameObject preRoundCards;
     
     public GameObject pausePanel;
     public GameObject MainGameGUI;
@@ -230,10 +232,9 @@ public class gameController : MonoBehaviour
         generateCity();
         turnTimer.SetActive(true);
 
-        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
-        else currentState = GameState.player1turn;
-        playerTurn();
-        forceBar.SetActive(false);
+        
+       
+        forceBar.SetActive(true);
         angleBar.SetActive(false);
         playerFiring = false;
         playerAngling = false;
@@ -242,6 +243,7 @@ public class gameController : MonoBehaviour
         FindObjectOfType<audioManager>().Play("Music");
         Player1NameDisplay.GetComponent<Text>().text = playerOne.name;
         Player2NameDisplay.GetComponent<Text>().text = playerTwo.name;
+        PreGameEnter();
 
     }
 
@@ -256,8 +258,28 @@ public class gameController : MonoBehaviour
       
         FindObjectOfType<audioManager>().Play("Select");
         GameSetup();
+        
 
     }
+
+    public void PreGameEnter()
+    {
+        
+        currentState = GameState.preRound;
+        preRoundCards.GetComponent<PreRoundDisplay>().preRoundCalled(playerOne.name, playerTwo.name);
+
+    }
+    
+    public void PreGameExit()
+    {
+        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
+        else currentState = GameState.player1turn;
+        roundText.SetActive(true);
+        roundText.GetComponent<roundText>().StartAnim(currentRound);
+
+    }
+
+
 
     public void playerInputs()
     {
@@ -425,8 +447,7 @@ public class gameController : MonoBehaviour
         Debug.Log(player1offset);
         playerOne.prefab.transform.position = new Vector2(playerOne.prefab.transform.position.x + player1offset, playerOne.prefab.transform.position.y + (buildingHeights[1 + player1offset] * 0.5f - 1.0f));
         playerTwo.prefab.transform.position = new Vector2(playerTwo.prefab.transform.position.x - player2offset, playerTwo.prefab.transform.position.y + (buildingHeights[18 - player2offset] * 0.5f - 1.0f));
-        roundText.SetActive(true);
-        roundText.GetComponent<roundText>().StartAnim(currentRound);
+        
         
     }
 
@@ -457,7 +478,7 @@ public class gameController : MonoBehaviour
         Player2ScoreDisplay.GetComponent<Text>().text = playerTwo.score.ToString();
         roundText.GetComponent<roundText>().StartAnim(currentRound);
         currentState = GameState.player1turn;
-        playerTurn();
+        
 
 
     }
@@ -518,7 +539,7 @@ public class gameController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
        
-        playerTurn();
+       
 
 
 
@@ -617,20 +638,6 @@ public class gameController : MonoBehaviour
 
 
 
-        public void playerTurn()
-    {
-
-
-        if (currentState == GameState.player1turn)
-        {
-         
-
-        }
-        if (currentState == GameState.player2turn)
-        {
-          
-        }
-    }
 
     public void resetLevel()
     {
