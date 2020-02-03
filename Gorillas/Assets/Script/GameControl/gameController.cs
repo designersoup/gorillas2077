@@ -55,6 +55,7 @@ public class gameController : MonoBehaviour
     public int numberOfRounds;
     public int roundTimer;
     public int currentRound;
+    public bool AIMode;
 
 
 
@@ -152,16 +153,28 @@ public class gameController : MonoBehaviour
         {
             if (currentState == GameState.player1turn)
             {
+                
                 forceBar.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(playerOne.prefab.transform.position.x + 0.8f, playerOne.prefab.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(-0.5f, 0.5f);
                 turnTimer.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y + 1.2f);
-                currentState = GameState.player1force;
-                
-                turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
-                playerOne.prefab.GetComponent<animationController>().setAnim("default");
-                playerTwo.prefab.GetComponent<animationController>().setAnim("idle");
-                StartCoroutine(forceGUI());
+                forceBar.SetActive(false);
+                angleBar.SetActive(false);
+                if (AIMode == false)
+                {
+                    currentState = GameState.player1force;
+
+                    turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+                    playerOne.prefab.GetComponent<animationController>().setAnim("default");
+                    playerTwo.prefab.GetComponent<animationController>().setAnim("idle");
+                    StartCoroutine(forceGUI());
+                }
+                else
+                {
+                    currentState = GameState.player1fire;
+                    playerFire(1.0f, 1.0f);
+                    
+                }
 
             }
             if (currentState == GameState.player2turn)
@@ -323,7 +336,7 @@ public class gameController : MonoBehaviour
         }
     }
 
-    public void playerFire(float angleInput, float forceInput)
+    /*public void playerFire(float angleInput, float forceInput)
     {
         if (currentState == GameState.player1fire)
         {
@@ -358,6 +371,42 @@ public class gameController : MonoBehaviour
             playerTwo.prefab.GetComponent<animationController>().setAnim("throw");
 
         }
+        FindObjectOfType<audioManager>().Play("BananaThrown");
+
+        // StartCoroutine(turnTimer());
+
+
+    }*/
+
+
+    public void playerFire(float angleInput, float forceInput)
+    {
+
+
+        if (currentState == GameState.player1fire && AIMode == false)
+        {
+            playerOne.prefab.GetComponent<playerScript>().PlayerFire(angleInput, forceInput, 1);
+
+        }
+
+        if (currentState == GameState.player1fire && AIMode == true)
+        {
+            playerOne.prefab.GetComponent<AI>().AIFire();
+
+        }
+
+
+        if (currentState == GameState.player2fire)
+        {
+            playerTwo.prefab.GetComponent<playerScript>().PlayerFire(angleInput, forceInput, 2);
+
+        }
+        turnTimer.GetComponent<turnTimer>().StopTimer();
+            
+
+
+
+        
         FindObjectOfType<audioManager>().Play("BananaThrown");
 
         // StartCoroutine(turnTimer());
@@ -737,6 +786,13 @@ public class gameController : MonoBehaviour
 
         setupScreen.SetActive(true);
         menuCard.SetActive(false);
+        AIMode = false;
+    }
+
+    public void StartOnePlayer()
+        {
+        AIMode = true;
+        GameStart();
     }
 
     public void ExitToMainMenuButton()

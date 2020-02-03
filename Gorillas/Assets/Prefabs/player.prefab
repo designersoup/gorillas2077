@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 7262040608086838019}
   - component: {fileID: 1757625287}
   - component: {fileID: 1757625292}
+  - component: {fileID: -1552958973561303531}
   m_Layer: 0
-  m_Name: Player1
+  m_Name: player
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,6 +149,8 @@ MonoBehaviour:
   gameContoller: {fileID: 0}
   playerID: 1
   invunerable: 0
+  bananaPrefab: {fileID: 8045430739272049049, guid: 20524c3ae852943dc93fa580d63e2463,
+    type: 3}
 --- !u!95 &1757625287
 Animator:
   serializedVersion: 3
@@ -180,3 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &-1552958973561303531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262040608086838030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21a3fe1277174329b06102c8d519a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
