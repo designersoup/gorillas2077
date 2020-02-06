@@ -17,15 +17,15 @@ public class AI : MonoBehaviour
         
     }
 
-    public void AIFire()
+    public void AIFire(float angle, float force)
     {
-        StartCoroutine(AIWait());
+        StartCoroutine(AIWait(angle, force));
     }
 
-    public IEnumerator AIWait()
+    public IEnumerator AIWait(float angle, float force)
     {
         yield return new WaitForSeconds(Random.Range(0.4f, 0.9f));
-        this.GetComponent<playerScript>().PlayerFire(45, 10, 1);
+        this.GetComponent<playerScript>().PlayerFire(angle, force, 1);
         Debug.Log("AI Fired");
 
     }

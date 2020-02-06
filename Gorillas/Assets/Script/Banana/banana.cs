@@ -27,7 +27,7 @@ public class banana : MonoBehaviour
     void Start()
     {
 
-        cameraObj = GameObject.Find("Main Camera");
+       cameraObj = GameObject.Find("Main Camera");
         cameraObj.GetComponent<cameraControl>().bananaActive = true;
         gameController = GameObject.Find("GameController");
        
@@ -45,7 +45,7 @@ public class banana : MonoBehaviour
 
             vertSpeed = vertSpeed - (gravity * Time.deltaTime);
             transform.Translate((Vector2.up * vertSpeed * Time.deltaTime));
-            cameraObj.GetComponent<cameraControl>().bananaPosition = transform.position;
+            if (cameraObj.gameObject !=null) cameraObj.GetComponent<cameraControl>().bananaPosition = transform.position;
         }
        
     }
@@ -88,6 +88,14 @@ public class banana : MonoBehaviour
             Destroy(gameObject);
             gameController.GetComponent<gameController>().TurnOver();
 
+        }
+
+        if (other.gameObject.CompareTag("Target"))
+        {
+            other.gameObject.SetActive(false);
+            Debug.Log("Target Hit");
+            Destroy(gameObject);
+            gameController.GetComponent<AITestController>().resetTarget();
         }
     }
 }

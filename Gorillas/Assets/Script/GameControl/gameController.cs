@@ -391,7 +391,7 @@ public class gameController : MonoBehaviour
 
         if (currentState == GameState.player1fire && AIMode == true)
         {
-            playerOne.prefab.GetComponent<AI>().AIFire();
+            playerOne.prefab.GetComponent<AI>().AIFire(45,10);
 
         }
 
