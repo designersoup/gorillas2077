@@ -9,6 +9,7 @@ public class LaunchArcRenderer : MonoBehaviour
 
     public GameObject player;
     public GameObject target;
+    public GameObject cityScript;
 
     public int velocity;
     public float angle = 90;
@@ -18,6 +19,7 @@ public class LaunchArcRenderer : MonoBehaviour
     public bool countDown;
     public bool running;
     public GameObject[] markerArray;
+    public bool[] markerSafe;
     public bool paused;
 
     public GameObject perimMarkerPF;
@@ -31,6 +33,7 @@ public class LaunchArcRenderer : MonoBehaviour
     public GameObject markerPrefab;
 
     public GameObject bananaPrefab;
+    public GameObject gameController;
     public float tolerance;
 
 
@@ -39,6 +42,7 @@ public class LaunchArcRenderer : MonoBehaviour
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics2D.gravity.y);
         markerArray = new GameObject[resolution];
+        markerSafe = new bool[resolution];
         for (int i = 0; i < resolution; i++)
 
         {
@@ -127,6 +131,7 @@ public class LaunchArcRenderer : MonoBehaviour
         for (int i = 0; i < resolution; i++)
         {
             markerArray[i].transform.position = arcArray[i];
+            markerSafe[i] = gameController.GetComponent<SafeZoneChecker>().SafeZoneCheck(markerArray[i].transform.position.x, markerArray[i].transform.position.y);
            
         }
 
@@ -139,6 +144,9 @@ public class LaunchArcRenderer : MonoBehaviour
 
         if (paused == false)
         {
+
+           
+
             for (int k = 0; k < resolution; k++)
             {
 
@@ -148,7 +156,8 @@ public class LaunchArcRenderer : MonoBehaviour
                     arcArray[k].y < target.transform.position.y + tolerance &&
                     arcArray[k].y > target.transform.position.y - tolerance)
                 {
-                    targetFound();
+                   
+                   if (isAllSafe() == true) targetFound();
                 }
             }
         }
@@ -158,6 +167,18 @@ public class LaunchArcRenderer : MonoBehaviour
 
         return arcArray;
     }
+
+    private bool isAllSafe()
+    {
+        for (int i = 0; i < markerSafe.Length; i++)
+
+        {
+            if (markerSafe[i] == false)
+                return false;
+        }
+        return true;
+    }
+
     
          
 
@@ -189,6 +210,12 @@ public class LaunchArcRenderer : MonoBehaviour
             if (countDown) angle--;
             else angle++;
 
+            if (velocity > 20)
+            {
+                running = false;
+                resetPause();
+            }
+
 
         }
         
@@ -198,8 +225,9 @@ public class LaunchArcRenderer : MonoBehaviour
 
     void resetTarget()
     {
-        target.transform.position = new Vector2(Random.Range(-3.0f, 7.0f), Random.Range(-3.0f,1.0f));
-        player.transform.position = new Vector2(player.transform.position.x, Random.Range(-3.0f, 1.0f));
+        // target.transform.position = new Vector2(Random.Range(-3.0f, 7.0f), Random.Range(-3.0f,1.0f));
+        // player.transform.position = new Vector2(player.transform.position.x, Random.Range(-3.0f, 1.0f));
+        cityScript.GetComponent<AICityScript>().resetCity();
         distance = Vector3.Distance(player.transform.position, target.transform.position);
         angle = 90;
         velocity = 2;
@@ -209,6 +237,7 @@ public class LaunchArcRenderer : MonoBehaviour
         lr.material.SetColor("_BaseColor", seekColor);
 
         StartCoroutine(angleChange());
+
     }
 
 
