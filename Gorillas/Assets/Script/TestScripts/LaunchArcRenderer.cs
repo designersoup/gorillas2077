@@ -7,6 +7,8 @@ public class LaunchArcRenderer : MonoBehaviour
 {
     LineRenderer lr;
 
+    public bool debugMode;
+
     public GameObject player;
     public GameObject target;
     public GameObject cityScript;
@@ -41,6 +43,7 @@ public class LaunchArcRenderer : MonoBehaviour
     {
         lr = GetComponent<LineRenderer>();
         g = Mathf.Abs(Physics2D.gravity.y);
+        
         markerArray = new GameObject[resolution];
         markerSafe = new bool[resolution];
         for (int i = 0; i < resolution; i++)
@@ -56,7 +59,7 @@ public class LaunchArcRenderer : MonoBehaviour
             pMAr[p] = Instantiate(perimMarkerPF, new Vector3(0, 0, 0), transform.rotation);
         }*/
 
-        resetTarget();
+       if (debugMode == true) resetTarget();
 
 
 
@@ -70,13 +73,13 @@ public class LaunchArcRenderer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        if (debugMode == false) AIturn();
 
     }
 
     private void Update()
     {
-        RenderArc();
+        if (debugMode == true) RenderArc();
         
     }
 
@@ -130,8 +133,9 @@ public class LaunchArcRenderer : MonoBehaviour
 
         for (int i = 0; i < resolution; i++)
         {
-            markerArray[i].transform.position = arcArray[i];
+           markerArray[i].transform.position = arcArray[i];
             markerSafe[i] = gameController.GetComponent<SafeZoneChecker>().SafeZoneCheck(markerArray[i].transform.position.x, markerArray[i].transform.position.y);
+            
            
         }
 
@@ -193,7 +197,8 @@ public class LaunchArcRenderer : MonoBehaviour
     IEnumerator angleChange()
     {
 
-
+        running = true;
+        Debug.Log("Angle co-routine called");
         while (running == true)
         {
              yield return new WaitForFixedUpdate();
@@ -232,11 +237,12 @@ public class LaunchArcRenderer : MonoBehaviour
         angle = 90;
         velocity = 2;
         countDown = true;
-        RenderArc();
-        running = true;
+       // RenderArc();
+        running = false;
         lr.material.SetColor("_BaseColor", seekColor);
 
-        StartCoroutine(angleChange());
+        if (debugMode == true) StartCoroutine(angleChange());
+        else AIturn();
 
     }
 
@@ -248,5 +254,48 @@ public class LaunchArcRenderer : MonoBehaviour
         Destroy(GameObject.FindWithTag("Banana"));
         resetTarget();
         paused = false;
+    }
+
+
+   public void AIturn()
+    {
+        Debug.Log("Ai Turn called");
+        cityScript.GetComponent<AICityScript>().resetCity();
+        angle = 90;
+        velocity = 1;
+        Debug.Log("Player Position x : " + player.transform.position.x);
+        Debug.Log("Player Position y : " + player.transform.position.y);
+        running = true;
+        while (running == true)
+        {
+           
+
+            
+            if (angle > 45)
+            {
+                angle--;
+                    }
+            else
+            {
+                angle = 90;
+                velocity++;
+            }
+
+            if (velocity > 20)
+            {
+                targetFound();
+            }
+            RenderArc();
+            //Debug.Break();
+
+
+
+
+            
+
+        }
+
+
+
     }
 }

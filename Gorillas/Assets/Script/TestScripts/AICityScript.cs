@@ -18,7 +18,7 @@ public class AICityScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generateCity();
+       // generateCity();
     }
 
     // Update is called once per frame

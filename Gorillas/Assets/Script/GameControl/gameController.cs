@@ -36,6 +36,7 @@ public class gameController : MonoBehaviour
         public int score;
         public GameObject prefab;
     }
+    public GameObject AIController;
 
 
     [Header("Prefabs")]
@@ -121,6 +122,9 @@ public class gameController : MonoBehaviour
     public GameObject musicButtonText;
     public GameObject soundButtonText;
 
+   public GameObject scrollingCity;
+
+
 
 
     // Start is called before the first frame update
@@ -137,7 +141,9 @@ public class gameController : MonoBehaviour
         roundText.SetActive(false);
 
         Debug.Log(playerOne.score);
-        
+
+       
+
 
 
 
@@ -171,9 +177,14 @@ public class gameController : MonoBehaviour
                 }
                 else
                 {
-                    currentState = GameState.player1fire;
-                    playerFire(1.0f, 1.0f);
-                    
+                     currentState = GameState.player1fire;
+
+                    float a;
+                    float v;
+                    AIController.GetComponent<AIController>().AIturn(out a, out v);
+
+                    playerFire(a,v);
+
                 }
 
             }
@@ -262,9 +273,12 @@ public class gameController : MonoBehaviour
 
     public void GameStart()
     {
+
         currentState = GameState.gameSetup;
         menuCard.SetActive(false);
         setupScreen.SetActive(false);
+        scrollingCity.GetComponentInChildren<CityBuilder>().destroyCity();
+        scrollingCity.SetActive(false);
         numberOfRounds = setupScreen.transform.Find("RoundNumberSelect").GetComponent<arrowSelects>().value;
         roundTimer = setupScreen.transform.Find("TurnTimeSelect").GetComponent<arrowSelects>().value;
         currentRound = 1;
@@ -391,7 +405,7 @@ public class gameController : MonoBehaviour
 
         if (currentState == GameState.player1fire && AIMode == true)
         {
-            playerOne.prefab.GetComponent<AI>().AIFire(45,10);
+            playerOne.prefab.GetComponent<AI>().AIFire(angleInput, forceInput);
 
         }
 
@@ -863,6 +877,13 @@ public class gameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         TurnOver();
+    }
+
+    public float GetZoneHeight(int zone)
+    {
+
+        return buildingHeights[zone + 1];
+
     }
 
 }

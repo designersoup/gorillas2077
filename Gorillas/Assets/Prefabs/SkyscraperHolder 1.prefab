@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8611051717254234130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8611051717254234132}
+  - component: {fileID: 8611051717254234131}
+  m_Layer: 0
+  m_Name: SkyscraperHolder 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8611051717254234132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611051717254234130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8611051717254234131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611051717254234130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae289bfa6efca4674948197cbbf54c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingBlock: {fileID: 3733980874215708510, guid: f1b02ba4d3b8a4c06852de71ba9229e4,
+    type: 3}
+  min: 7
+  max: 17
+  cityBuilder: {fileID: 0}
+  gorilla: {fileID: 7262040608086838030, guid: 27e4083a8df104c1998a6cd3006d55b1, type: 3}
+  buildingBlocks:
+  - {fileID: 21300000, guid: c56702dc869c3480a8232677834ceee2, type: 3}
+  - {fileID: 21300000, guid: 85e872db14cd14577a1e514286502203, type: 3}
+  - {fileID: 21300000, guid: 6553344864f8b4c49a243a008c00618e, type: 3}
+  - {fileID: 21300000, guid: 20ad76a47c73a4614afb5621123f98fd, type: 3}
+  - {fileID: 21300000, guid: d6f723dfa34a84173b6b1669d7750810, type: 3}
+  - {fileID: 21300000, guid: ef16f3accad1a4ab1b210a94f868a251, type: 3}
+  playerBlock: 0
+  parallaxScale: 1
+  offsetHeight: 0
