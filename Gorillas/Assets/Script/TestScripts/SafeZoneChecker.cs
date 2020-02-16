@@ -35,6 +35,7 @@ public class SafeZoneChecker : MonoBehaviour
             if (pointX > -9.0f + i && pointX < -8.0f + i)
             {
                    float tempY = -4.77f + ((GetComponent<gameController>().GetZoneHeight(i)));
+               
                 //float tempY = -4.77f + ((GetComponent<AICityScript>().GetZoneHeight(i)));
                 // Debug.Log("Y zone = " + temp);
 

@@ -56,7 +56,11 @@ public class gameController : MonoBehaviour
     public int numberOfRounds;
     public int roundTimer;
     public int currentRound;
+    
+
+    [Header("AI")]
     public bool AIMode;
+    public float AIAbility;
 
 
 
@@ -77,6 +81,7 @@ public class gameController : MonoBehaviour
     public GameObject menuCard;
     public GameObject optionsCard;
     public GameObject setupScreen;
+    public GameObject soloSetupScreen;
     public GameObject gameEndedCard;
 
     public GameObject winPanel;
@@ -183,7 +188,7 @@ public class gameController : MonoBehaviour
                     float v;
                     AIController.GetComponent<AIController>().AIturn(out a, out v);
 
-                    playerFire(a,v);
+                    playerFire(a + (Random.Range(-5.0f, 5.0f) * AIAbility),v + (Random.Range(-2.0f,2.0f) * AIAbility));
 
                 }
 
@@ -795,7 +800,7 @@ public class gameController : MonoBehaviour
         FindObjectOfType<audioManager>().Play("Select");
     }
 
-    public void matchSetup()
+    public void VSmatchSetup()
     {
 
         setupScreen.SetActive(true);
@@ -803,8 +808,17 @@ public class gameController : MonoBehaviour
         AIMode = false;
     }
 
+    public void soloMatchSetup()
+    {
+
+        soloSetupScreen.SetActive(true);
+        menuCard.SetActive(false);
+        
+    }
+
     public void StartOnePlayer()
         {
+        soloSetupScreen.SetActive(false);
         AIMode = true;
         GameStart();
     }
@@ -882,7 +896,7 @@ public class gameController : MonoBehaviour
     public float GetZoneHeight(int zone)
     {
 
-        return buildingHeights[zone + 1];
+        return buildingHeights[zone + 1] / 2;
 
     }
 

@@ -92,6 +92,7 @@ public class AIController : MonoBehaviour
     {
         running = false;
         lr.material.SetColor("_BaseColor", foundColor);
+        Debug.Log("Target found!");
       //  GameObject banana = Instantiate(bananaPrefab, player.transform.position, Quaternion.identity);
       //  banana.GetComponent<banana>().vertSpeed = Mathf.Sin((angle * Mathf.PI) / 180) * velocity;
       //  banana.GetComponent<banana>().horzSpeed = Mathf.Cos((angle * Mathf.PI) / 180) * velocity;
@@ -156,7 +157,7 @@ public class AIController : MonoBehaviour
 
            
 
-            for (int k = 0; k < resolution; k++)
+           for (int k = 0; k < resolution; k++)
             {
 
 
@@ -170,6 +171,8 @@ public class AIController : MonoBehaviour
                     targetFound();
                 }
             }
+
+        
         }
 
       
@@ -180,6 +183,7 @@ public class AIController : MonoBehaviour
 
     private bool isAllSafe()
     {
+        Debug.Log("Is Safe Called");
         for (int i = 0; i < markerSafe.Length; i++)
 
         {
@@ -226,6 +230,7 @@ public class AIController : MonoBehaviour
                 running = false;
                 resetPause();
             }
+            RenderArc();
 
 
         }
@@ -239,7 +244,7 @@ public class AIController : MonoBehaviour
         // target.transform.position = new Vector2(Random.Range(-3.0f, 7.0f), Random.Range(-3.0f,1.0f));
         // player.transform.position = new Vector2(player.transform.position.x, Random.Range(-3.0f, 1.0f));
         cityScript.GetComponent<AICityScript>().resetCity();
-        distance = Vector3.Distance(player.transform.position, target.transform.position);
+        
         angle = 90;
         velocity = 2;
         countDown = true;
@@ -266,38 +271,61 @@ public class AIController : MonoBehaviour
    public void AIturn(out float angleReturn, out float velocityReturn)
     {
         Debug.Log("Ai Turn called");
-      //  cityScript.GetComponent<AICityScript>().resetCity();
-        angle = 90;
-        velocity = 2;
-     //   Debug.Log("Player Position x : " + player.transform.position.x);
-      //  Debug.Log("Player Position y : " + player.transform.position.y);
-        running = true;
-       while (running == true)
-        {
+      //  angle = 90;
+      //  countDown = true;
+       velocity = 1;
+        //  cityScript.GetComponent<AICityScript>().resetCity();
+      //     angle = 90;
+        //    velocity = 2;
+           Debug.Log("Player Position x : " + target.transform.position.x);
+           Debug.Log("Player Position y : " + target.transform.position.y);
+        // distance = Vector3.Distance(player.transform.position, target.transform.position);
+        // running = true;
+
+
+        /*  while (running == true)
+           {
 
 
 
-            if (angle > 45)
-            {
-                   angle--;
-            }
-            else
-            {
-                   angle = 90;
-                   velocity++;
-            }
+               if (angle > 45)
+               {
+                      angle--;
+               }
+               else
+               {
+                      angle = 90;
+                      velocity++;
+               Debug.Log("Velocity = " + velocity);
+               }
 
-            if (velocity > 20)
-            {
-                targetFound();
-            } 
-             RenderArc();
-            Debug.Log("WhileLoopCalled: " + angle);
-            
-        }
-        targetFound();
+               if (velocity > 20)
+               {
+
+               Debug.Log("Couldn't find target!");
+               angle = 30;
+               velocity = 10;
+               targetFound();
+
+
+               }
+
+         //  Debug.Log("Render Arc");
+           RenderArc();
+
+            //   Debug.Log("WhileLoopCalled: " + angle);
+
+           }*/
+
+        // StartCoroutine(angleChange());
+        basicDistance(out angle, out velocity);
+        Debug.Log("Returning angle");
+        if (debugMode) RenderArc();
         angleReturn = angle;
         velocityReturn = velocity;
+
+
+
 
 
         
@@ -315,4 +343,33 @@ public class AIController : MonoBehaviour
 
 
     }
+
+    public void basicDistance(out float angleReturn, out int velocityReturn)
+
+    {
+
+        angle = 90;
+        velocity = 1;
+        distance = Vector3.Distance(player.transform.position, target.transform.position);
+        float tempDistance = 0;
+        while (tempDistance < distance - 0.2f)
+        {
+            float radianAngle = Mathf.Deg2Rad * angle;
+            tempDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
+            angle--;
+            if (angle < 45)
+            {
+                angle = 90;
+                velocity++;
+            }
+            Debug.Log("Basic Distance Running");
+        }
+
+        angleReturn = angle;
+        velocityReturn = velocity;
+
+    }
+
+
+
 }
