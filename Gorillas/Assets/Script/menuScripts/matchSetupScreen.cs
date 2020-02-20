@@ -27,4 +27,11 @@ public class matchSetupScreen : MonoBehaviour
         gameController.GetComponent<gameController>().GameStart();
 
     }
+
+    public void BackButton()
+    {
+        gameController.GetComponent<gameController>().setupScreen.SetActive(false);
+        gameController.GetComponent<gameController>().menuCard.SetActive(true);
+
+    }
 }

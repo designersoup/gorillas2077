@@ -94,6 +94,8 @@ public class gameController : MonoBehaviour
     public GameObject Player1NameDisplay;
     public GameObject Player2NameDisplay;
 
+    public GameObject blurPanel;
+
     [Header("HUD Items")]
     public GameObject forceBar;
     public GameObject angleBar;
@@ -127,7 +129,13 @@ public class gameController : MonoBehaviour
     public GameObject musicButtonText;
     public GameObject soundButtonText;
 
+
+
+
    public GameObject scrollingCity;
+
+
+    private GameObject bananaTemp;
 
 
 
@@ -138,6 +146,7 @@ public class gameController : MonoBehaviour
         currentState = GameState.titleCard;
         playerOne.prefab.SetActive(false);
         playerTwo.prefab.SetActive(false);
+        blurPanel.SetActive(false);
         MainGameGUI.SetActive(false);
         menuCard.SetActive(false);
         optionsCard.SetActive(false);
@@ -146,8 +155,9 @@ public class gameController : MonoBehaviour
         roundText.SetActive(false);
 
         Debug.Log(playerOne.score);
+        FindObjectOfType<audioManager>().Play("Music");
 
-       
+
 
 
 
@@ -175,7 +185,8 @@ public class gameController : MonoBehaviour
                 {
                     currentState = GameState.player1force;
 
-                    turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+                    if (!AIMode) turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+                    
                     playerOne.prefab.GetComponent<animationController>().setAnim("default");
                     playerTwo.prefab.GetComponent<animationController>().setAnim("idle");
                     StartCoroutine(forceGUI());
@@ -183,7 +194,7 @@ public class gameController : MonoBehaviour
                 else
                 {
                      currentState = GameState.player1fire;
-
+                    turnTimer.SetActive(false);
                     float a;
                     float v;
                     AIController.GetComponent<AIController>().AIturn(out a, out v);
@@ -195,13 +206,16 @@ public class gameController : MonoBehaviour
             }
             if (currentState == GameState.player2turn)
             {
+
                 forceBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x - 0.8f, playerTwo.prefab.transform.position.y + 0.6f);
                 angleBar.transform.localScale = new Vector2(0.5f, 0.5f);
                 turnTimer.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y + 1.2f);
                 currentState = GameState.player2force;
-                
+
+                if (AIMode) turnTimer.SetActive(true);
                 turnTimer.GetComponent<turnTimer>().StartTimer(roundTimer);
+
                 playerOne.prefab.GetComponent<animationController>().setAnim("idle");
                 playerTwo.prefab.GetComponent<animationController>().setAnim("default");
 
@@ -269,7 +283,7 @@ public class gameController : MonoBehaviour
         playerAngling = false;
         Player1ScoreDisplay.GetComponent<Text>().text = 0.ToString();
         Player2ScoreDisplay.GetComponent<Text>().text = 0.ToString();
-        FindObjectOfType<audioManager>().Play("Music");
+        
         Player1NameDisplay.GetComponent<Text>().text = playerOne.name;
         Player2NameDisplay.GetComponent<Text>().text = playerTwo.name;
         PreGameEnter();
@@ -282,13 +296,16 @@ public class gameController : MonoBehaviour
         currentState = GameState.gameSetup;
         menuCard.SetActive(false);
         setupScreen.SetActive(false);
-        scrollingCity.GetComponentInChildren<CityBuilder>().destroyCity();
+        blurPanel.SetActive(false);
         scrollingCity.SetActive(false);
-        numberOfRounds = setupScreen.transform.Find("RoundNumberSelect").GetComponent<arrowSelects>().value;
+        if (AIMode) numberOfRounds = soloSetupScreen.transform.Find("RoundNumberSelectSolo").GetComponent<arrowSelects>().value;
+       else numberOfRounds = setupScreen.transform.Find("RoundNumberSelect").GetComponent<arrowSelects>().value;
+
         roundTimer = setupScreen.transform.Find("TurnTimeSelect").GetComponent<arrowSelects>().value;
         currentRound = 1;
       
         FindObjectOfType<audioManager>().Play("Select");
+        
         GameSetup();
         
 
@@ -299,6 +316,7 @@ public class gameController : MonoBehaviour
         
         currentState = GameState.preRound;
         preRoundCards.GetComponent<PreRoundDisplay>().preRoundCalled(playerOne.name, playerTwo.name);
+        
 
     }
     
@@ -308,6 +326,7 @@ public class gameController : MonoBehaviour
         else currentState = GameState.player1turn;
         roundText.SetActive(true);
         roundText.GetComponent<roundText>().StartAnim(currentRound);
+        resetAnims();
 
     }
 
@@ -346,6 +365,7 @@ public class gameController : MonoBehaviour
                 currentState = GameState.mainMenu;
                 titleCard.SetActive(false);
                 menuCard.SetActive(true);
+                blurPanel.SetActive(true);
 
 
                 break;
@@ -711,8 +731,15 @@ public class gameController : MonoBehaviour
     {
         //Debug.Log("Restarting level");
         //Application.LoadLevel(Application.loadedLevel);
-        
+        resetAnims();
         resetCity();
+    }
+
+
+    public void resetAnims()
+    {
+        playerOne.prefab.GetComponent<animationController>().setAnim("default");
+        playerTwo.prefab.GetComponent<animationController>().setAnim("default");
     }
 
     public void exitGame()
@@ -819,6 +846,7 @@ public class gameController : MonoBehaviour
     public void StartOnePlayer()
         {
         soloSetupScreen.SetActive(false);
+        numberOfRounds = soloSetupScreen.transform.Find("RoundNumberSelectSolo").GetComponent<arrowSelects>().value;
         AIMode = true;
         GameStart();
     }
@@ -842,8 +870,10 @@ public class gameController : MonoBehaviour
         angleBar.SetActive(false);
         forceCounter = 0;
         angleCounter = 0;
-
+        bananaTemp = GameObject.FindWithTag("Banana");
+        Destroy(bananaTemp);
         destroyBuildings = GameObject.FindGameObjectsWithTag("Building");
+        
 
         for (var i = 0; i < destroyBuildings.Length; i++)
         {
@@ -861,6 +891,9 @@ public class gameController : MonoBehaviour
         buildingHeights = new int[0];
         gamePaused = false;
         gameEndedCard.SetActive(false);
+
+        scrollingCity.SetActive(true);
+        blurPanel.SetActive(true);
 
 
     }

@@ -32,4 +32,11 @@ public class soloMatchSetup : MonoBehaviour
         gameController.GetComponent<gameController>().StartOnePlayer();
 
     }
+
+    public void BackButton()
+    {
+        gameController.GetComponent<gameController>().soloSetupScreen.SetActive(false);
+        gameController.GetComponent<gameController>().menuCard.SetActive(true);
+
+    }
 }
