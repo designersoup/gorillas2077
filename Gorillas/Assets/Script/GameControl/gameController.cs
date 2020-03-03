@@ -102,6 +102,7 @@ public class gameController : MonoBehaviour
     public GameObject turnTimer;
     public bool turnTimeLeft;
     public GameObject roundText;
+    public GameObject spaceToFire;
     
 
     [Header("Building Customisation")]
@@ -136,6 +137,8 @@ public class gameController : MonoBehaviour
 
 
     private GameObject bananaTemp;
+
+   
 
 
 
@@ -201,6 +204,7 @@ public class gameController : MonoBehaviour
 
                     playerFire(a + (Random.Range(-5.0f, 5.0f) * AIAbility),v + (Random.Range(-2.0f,2.0f) * AIAbility));
 
+
                 }
 
             }
@@ -250,6 +254,7 @@ public class gameController : MonoBehaviour
                 forceBar.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(playerOne.prefab.transform.position.x + 0.8f, playerOne.prefab.transform.position.y + 0.6f);
                 turnTimer.transform.position = new Vector2(playerOne.prefab.transform.position.x, playerOne.prefab.transform.position.y + 1.2f);
+                if(AIMode == false)  spaceToFire.SetActive(true);
             }
 
             if (currentState == GameState.player2fire || currentState == GameState.player2force)
@@ -257,6 +262,7 @@ public class gameController : MonoBehaviour
                 forceBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y - 1.0f);
                 angleBar.transform.position = new Vector2(playerTwo.prefab.transform.position.x - 0.8f, playerTwo.prefab.transform.position.y + 0.6f);
                 turnTimer.transform.position = new Vector2(playerTwo.prefab.transform.position.x, playerTwo.prefab.transform.position.y + 1.2f);
+                spaceToFire.SetActive(true);
             }
         }
 
@@ -271,13 +277,14 @@ public class gameController : MonoBehaviour
 
         playerOne.prefab.SetActive(true);
         playerTwo.prefab.SetActive(true);
+        spaceToFire.SetActive(false);
         MainGameGUI.SetActive(true);
         generateCity();
-        turnTimer.SetActive(true);
+        turnTimer.SetActive(false);
 
         
        
-        forceBar.SetActive(true);
+        forceBar.SetActive(false);
         angleBar.SetActive(false);
         playerFiring = false;
         playerAngling = false;
@@ -286,6 +293,8 @@ public class gameController : MonoBehaviour
         
         Player1NameDisplay.GetComponent<Text>().text = playerOne.name;
         Player2NameDisplay.GetComponent<Text>().text = playerTwo.name;
+        
+        resetAnims();
         PreGameEnter();
 
     }
@@ -303,6 +312,8 @@ public class gameController : MonoBehaviour
 
         roundTimer = setupScreen.transform.Find("TurnTimeSelect").GetComponent<arrowSelects>().value;
         currentRound = 1;
+        turnTimer.SetActive(false);
+
       
         FindObjectOfType<audioManager>().Play("Select");
         
@@ -311,22 +322,49 @@ public class gameController : MonoBehaviour
 
     }
 
-    public void PreGameEnter()
+    public void displayRoundText()
+    {
+        roundText.GetComponent<roundText>().StartAnim(currentRound);
+        roundText.SetActive(true);
+    }
+
+    public IEnumerator displayRoundPause()
+    {
+        yield return new WaitForSeconds(2.0f);
+        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
+
+        else currentState = GameState.player1turn;
+
+        resetAnims();
+
+    }   
+
+        public void PreGameEnter()
     {
         
         currentState = GameState.preRound;
         preRoundCards.GetComponent<PreRoundDisplay>().preRoundCalled(playerOne.name, playerTwo.name);
         
+        
+
 
     }
     
     public void PreGameExit()
     {
-        if (Random.Range(0, 2) == 1) currentState = GameState.player2turn;
-        else currentState = GameState.player1turn;
-        roundText.SetActive(true);
-        roundText.GetComponent<roundText>().StartAnim(currentRound);
-        resetAnims();
+        displayRoundText();
+        StartCoroutine (displayRoundPause());
+       
+
+    }
+
+    public void PreRoundEnter()
+    {
+
+    }
+
+    public void PreRoundExit()
+    {
 
     }
 
@@ -340,6 +378,7 @@ public class gameController : MonoBehaviour
             case GameState.player1force:
                 playerFiring = false;
                 currentState = GameState.player1angle;
+                
                 StartCoroutine(angleGUI());
                 break;
 
@@ -347,11 +386,15 @@ public class gameController : MonoBehaviour
                 playerAngling = false;
                 currentState = GameState.player1fire;
                 StartCoroutine(launchDelay());
+                forceBar.SetActive(false);
+                angleBar.SetActive(false);
+                
                 break;
 
             case GameState.player2force:
                 playerFiring = false;
                 currentState = GameState.player2angle;
+                
                 StartCoroutine(angleGUI());
                 break;
 
@@ -359,6 +402,9 @@ public class gameController : MonoBehaviour
                 playerAngling = false;
                 currentState = GameState.player2fire;
                 StartCoroutine(launchDelay());
+                forceBar.SetActive(false);
+                angleBar.SetActive(false);
+                
                 break;
 
             case GameState.titleCard:
@@ -440,6 +486,7 @@ public class gameController : MonoBehaviour
             playerTwo.prefab.GetComponent<playerScript>().PlayerFire(angleInput, forceInput, 2);
 
         }
+        spaceToFire.SetActive(false);
         turnTimer.GetComponent<turnTimer>().StopTimer();
             
 
@@ -560,14 +607,23 @@ public class gameController : MonoBehaviour
         buildingHeights = new int[0];
         playerOne.prefab.SetActive(true);
         playerTwo.prefab.SetActive(true);
+       
         
         generateCity();
         Player1ScoreDisplay.GetComponent<Text>().text = playerOne.score.ToString();
         Player2ScoreDisplay.GetComponent<Text>().text = playerTwo.score.ToString();
         roundText.GetComponent<roundText>().StartAnim(currentRound);
-        currentState = GameState.player1turn;
+        StartCoroutine (roundTextPauseV2());
+        
         
 
+
+    }
+
+    public IEnumerator roundTextPauseV2()
+    {
+        yield return new WaitForSeconds(2.0f);
+        currentState = GameState.player1turn;
 
     }
 
@@ -621,6 +677,7 @@ public class gameController : MonoBehaviour
         gameEndedCard.SetActive(true);
         gameEndedCard.GetComponent<endOfGame>().showScores(playerOne.name, playerOne.score, playerTwo.name, playerTwo.score);
         MainGameGUI.SetActive(false);
+        resetAnims();
     }
 
     public IEnumerator TurnEndTimer()
@@ -752,6 +809,7 @@ public class gameController : MonoBehaviour
     public void Pause()
     {
         gamePaused = true;
+        turnTimer.GetComponent<turnTimer>().pauseTimer = true ;
         GameObject flyingBanana = GameObject.FindWithTag("Banana");
         if (flyingBanana != null)
         {
@@ -759,6 +817,8 @@ public class gameController : MonoBehaviour
         }
         pausePanel.SetActive(true);
         FindObjectOfType<audioManager>().Play("Select");
+        roundText.GetComponent<roundText>().PauseAnim();
+        
     }
 
     public void UnPause()
@@ -772,6 +832,11 @@ public class gameController : MonoBehaviour
         pausePanel.SetActive(false);
         bananaPrefab.GetComponent<banana>().gamePaused = false;
         FindObjectOfType<audioManager>().Play("Select");
+       
+        turnTimer.GetComponent<turnTimer>().UnPauseTimer();
+        roundText.GetComponent<roundText>().UnPauseAnim();
+
+
     }
 
     public void musicButton()
@@ -915,6 +980,7 @@ public class gameController : MonoBehaviour
     {
 
         yield return new WaitForSeconds(0.1f);
+        spaceToFire.SetActive(false);
         playerFire(angleCounter, forceCounter);
 
 

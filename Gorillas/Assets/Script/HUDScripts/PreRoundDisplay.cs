@@ -39,6 +39,8 @@ public class PreRoundDisplay : MonoBehaviour
         anim.enabled = true;
         anim.Play("preRoundAnimation", 0, 0f);
         yield return new WaitForSeconds(4.0f);
+
+       
         
         gameController.GetComponent<gameController>().PreGameExit();
         anim.enabled = false;

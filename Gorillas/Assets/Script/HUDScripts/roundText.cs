@@ -21,4 +21,14 @@ public class roundText : MonoBehaviour
         anim.Play("roundTextAnim", 0,0f);
 
     }
+
+    public void PauseAnim()
+    {
+        anim.enabled = false;
+    }
+
+    public void UnPauseAnim()
+    {
+        anim.enabled = true;
+    }
 }

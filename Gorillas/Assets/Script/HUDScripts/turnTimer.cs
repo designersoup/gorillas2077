@@ -8,6 +8,7 @@ public class turnTimer : MonoBehaviour
     public bool timeUp;
     public bool turnStopped;
     public GameObject gameController;
+    public bool pauseTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,12 @@ public class turnTimer : MonoBehaviour
         
     }
 
+    public void UnPauseTimer()
+    {
+        pauseTimer = false;
+        StartCoroutine(turnTiming());
+    }
+
     public void StopTimer()
     {
         turnStopped = true;
@@ -34,7 +41,7 @@ public class turnTimer : MonoBehaviour
 
     public IEnumerator turnTiming()
     {
-        while (timeLeft > 0 && turnStopped == false)
+        while (timeLeft > 0 && turnStopped == false && pauseTimer == false)
         {
 
 
